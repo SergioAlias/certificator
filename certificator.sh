@@ -13,14 +13,14 @@ TYPE=$5
 
 mkdir -p $OUTDIR
 
-while IFS=';' read -r cole tutor name; do
+while IFS=';' read -r cole tutor name extra_col_to_avoid_newlines; do
 
     unzip $TEMPLATE -d tmp_dir
     if [[ "$TYPE" == [Aa] ]]; then
         sed -i "s/NAME_ALUMNO/$name/g" tmp_dir/$XML
         NAME_NO_SP=$(echo "$name" | tr ' ' '_')
     elif [[ "$TYPE" == [Cc] ]]; then
-        sed -i "s/NAME_COLE/$cole/g" tmp_dir/$XML
+        sed -i "s/NAME_CENTRO/$cole/g" tmp_dir/$XML
         sed -i "s/NAME_TUTOR/$tutor/g" tmp_dir/$XML
         NAME_NO_SP=$(echo "$cole" | tr ' ' '_')
     fi
@@ -31,10 +31,10 @@ while IFS=';' read -r cole tutor name; do
     mv "$NAME_NO_SP.pdf" $OUTDIR
     rm -rf tmp_dir
     rm "$NAME_NO_SP.pptx"
-    echo "Done -> "$NAME_NO_SP".pdf"
-    sleep 2
+    echo "################## Done -> "$NAME_NO_SP".pdf"
 
 done < $NAMES
 
-echo "Finished certificate generation"
-echo "PDF files can be found at "$OUTDIR
+echo "################## Finished certificate generation"
+echo "######################################################"
+echo "################## PDF files can be found at "$OUTDIR
