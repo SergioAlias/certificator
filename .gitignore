@@ -2,5 +2,5 @@ test/
 *.docx
 *.xlsx
 *.pptx
-
-
+*.csv
+*.pdf
